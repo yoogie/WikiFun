@@ -12,3 +12,4 @@ class WikiItem(scrapy.Item):
 	url = scrapy.Field()
 	title = scrapy.Field()
 	desc  = scrapy.Field()
+	links = scrapy.Field()
