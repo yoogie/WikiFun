@@ -44,5 +44,5 @@ class Spider(CrawlSpider):
 		for l in links:
 			arr.append(l)
 
-		item['links'] = json.dumps(arr)
+		item['links'] = arr
 		return item
