@@ -8,7 +8,13 @@ import json
 
 
 class WikiPipeline(object):
+    def open_spider(self, spider):
+        self.file = open('data.json', 'w')
+
+    def close_spider(self, spider):
+        self.file.close()
+
     def process_item(self, item, spider):
-	with open('data.json', 'a') as outfile:
-		outfile.write(str(item))
+	d = dict(item)
+	self.file.write('{}\n'.format(str(d)))
 	return item

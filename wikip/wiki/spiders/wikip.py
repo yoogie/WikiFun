@@ -29,7 +29,6 @@ class Spider(CrawlSpider):
 
 
 	def parse_wikipedia_page(self, response):
-#		print '\n->', response,'\n\n'
 		item = WikiItem()
 		soup = BeautifulSoup(response.body)
 		item['url'] = response.url
