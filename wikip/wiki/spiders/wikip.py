@@ -29,20 +29,23 @@ class Spider(CrawlSpider):
 
 
 	def parse_wikipedia_page(self, response):
-		print '->', response.url
+#		print '\n->', response,'\n\n'
 		item = WikiItem()
 		soup = BeautifulSoup(response.body)
 		item['url'] = response.url
 		item['title'] = soup.find('h1', {'id':'firstHeading'}).string
 		item['desc'] = soup.find('div', {'id':'mw-content-text'}).find('p')
 
-		links= set()
+		#Create array of all links in description field
+		unique_links= set()
 		for link in soup.find('div', {'id':'mw-content-text'}).find('p').findAll('a', attrs={'href': re.compile('^/wiki/')}):
-			links.add('http://en.wikipedia.org{}'.format(link.get('href')))
+			unique_links.add('http://en.wikipedia.org{}'.format(link.get('href')))
+		links = []
+		for link in unique_links:
+			links.append(link)
+		item['links'] = links
 
-		arr = []
-		for l in links:
-			arr.append(l)
+		#Get fotter information on page
+		item['footer'] = soup.find('ul', {'id':'footer-info'}).find('li', {'id':'footer-info-lastmod'}).string
 
-		item['links'] = arr
 		return item

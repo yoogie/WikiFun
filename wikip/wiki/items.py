@@ -13,3 +13,5 @@ class WikiItem(scrapy.Item):
 	title = scrapy.Field()
 	desc  = scrapy.Field()
 	links = scrapy.Field()
+	footer = scrapy.Field()
+#	last_changed = scrapy.Field() #candidate for LS-mutate from fotter?
