@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 
 # Define your item pipelines here
 #
@@ -8,4 +9,6 @@
 
 class WikiPipeline(object):
     def process_item(self, item, spider):
-        return item
+	with open('data.json', 'a') as outfile:
+		outfile.write(str(item))
+	return item
